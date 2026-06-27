@@ -1,0 +1,424 @@
+/* ---- CSS variables ---- */
+:root {
+  --bg-page: #f5f2fa;
+  --bg-card: #ffffff;
+  --bg-card2: #faf8fd;
+  --bg-input: #f2eef8;
+  --border: rgba(82, 49, 138, 0.15);
+  --border-focus: #52318A;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --accent: #52318A;
+  --accent-dark: #3e2169;
+  --accent-light: #ede8f7;
+  --accent-glow: rgba(82, 49, 138, 0.18);
+  --shadow-card: 0 2px 16px rgba(82,49,138,0.08), 0 1px 4px rgba(0,0,0,0.04);
+  --shadow-btn: 0 2px 8px rgba(82,49,138,0.3);
+  --radius-card: 1.25rem;
+  --radius-input: 0.75rem;
+  --radius-btn: 0.75rem;
+  --transition: 0.18s ease;
+}
+
+[data-theme="dark"] {
+  --bg-page: #0e0a17;
+  --bg-card: #1a1228;
+  --bg-card2: #211732;
+  --bg-input: #281d3d;
+  --border: rgba(140, 100, 210, 0.2);
+  --border-focus: #9b6dd6;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #4b5563;
+  --accent: #9b6dd6;
+  --accent-dark: #7c4fbf;
+  --accent-light: rgba(82,49,138,0.18);
+  --accent-glow: rgba(155,109,214,0.22);
+  --shadow-card: 0 2px 24px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.3);
+  --shadow-btn: 0 2px 12px rgba(82,49,138,0.45);
+}
+
+/* ---- Reset ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  background: var(--bg-page);
+  transition: background var(--transition);
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  min-height: 100dvh;
+  transition: background var(--transition), color var(--transition);
+}
+
+/* ---- App shell ---- */
+.app {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 1rem 4rem;
+}
+
+/* ---- Top bar ---- */
+.topbar {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-top: 0.25rem;
+}
+
+/* ---- Core9 logo ---- */
+.core9-logo {
+  height: 32px;
+  width: auto;
+  /* In dark mode invert the logo so it stays visible */
+  filter: none;
+  transition: filter var(--transition);
+}
+[data-theme="dark"] .core9-logo {
+  filter: brightness(0) invert(1);
+}
+
+/* ---- Topbar actions group ---- */
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ---- Logout button ---- */
+.logout-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  box-shadow: var(--shadow-card);
+}
+.logout-btn:hover { border-color: #ef4444; color: #ef4444; }
+
+/* ---- Theme toggle ---- */
+.theme-toggle {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  box-shadow: var(--shadow-card);
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ---- Header ---- */
+.app-header { text-align: center; margin-bottom: 1.5rem; }
+
+.app-title {
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, var(--accent) 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+}
+
+.subtitle {
+  margin-top: 0.3rem;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+/* ---- Main ---- */
+.app-main {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ---- Card ---- */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+/* ---- Step pill ---- */
+.step-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.step-num {
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: var(--accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+/* ---- Mode selector (checkboxes) ---- */
+.mode-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.mode-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem 1rem;
+  background: var(--bg-input);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-input);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.mode-checkbox:hover { border-color: var(--accent); background: var(--accent-light); }
+.mode-checkbox--active {
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+.mode-checkbox input[type="checkbox"] {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--accent);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.mode-checkbox-label {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.mode-checkbox--active .mode-checkbox-label { color: var(--accent); }
+
+/* ---- Divider ---- */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0 -1.75rem;
+}
+
+/* ---- Button row ---- */
+.btn-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+/* ---- Buttons ---- */
+.btn {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: var(--radius-btn);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-family: inherit;
+}
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn-icon {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  background: var(--bg-input);
+  border: 1.5px solid var(--border);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition);
+  flex: none;
+}
+.btn-icon:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
+.btn-outline {
+  background: var(--bg-input);
+  border: 1.5px solid var(--border);
+  color: var(--text-primary);
+}
+.btn-outline:not(:disabled):hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: var(--shadow-btn);
+  font-size: 1rem;
+  padding: 0.9rem;
+}
+.btn-primary:not(:disabled):hover { background: var(--accent-dark); transform: translateY(-1px); }
+.btn-primary:not(:disabled):active { transform: translateY(0); }
+
+/* ---- Select ---- */
+.select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-input);
+  background: var(--bg-input);
+  color: var(--text-primary);
+  appearance: auto;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color var(--transition), background var(--transition);
+}
+.select:focus { outline: none; border-color: var(--border-focus); }
+
+/* ---- Preview ---- */
+.preview-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--bg-input);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-input);
+  padding: 0.75rem;
+}
+.preview-img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  flex-shrink: 0;
+}
+.preview-info { display: flex; flex-direction: column; gap: 0.2rem; overflow: hidden; }
+.preview-name { font-size: 0.82rem; font-weight: 600; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.preview-size { font-size: 0.75rem; color: var(--text-muted); }
+
+/* ---- Webcam ---- */
+.webcam-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-radius: var(--radius-input);
+  overflow: hidden;
+  border: 1.5px solid var(--border);
+}
+.webcam-video { width: 100%; display: block; background: #000; max-height: 260px; object-fit: cover; }
+.webcam-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: var(--bg-card2);
+}
+
+/* ---- Cold-start banner ---- */
+.cold-start-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: var(--radius-input);
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+
+.cold-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+.cold-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #d97706;
+}
+
+.cold-sub {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 0.15rem;
+  line-height: 1.4;
+}
+
+/* ---- Inline error ---- */
+.inline-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0.9rem;
+  background: rgba(239,68,68,0.08);
+  border: 1px solid rgba(239,68,68,0.25);
+  border-radius: var(--radius-input);
+  color: #ef4444;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* ---- Button spinner ---- */
+@keyframes spin-sm { to { transform: rotate(360deg); } }
+.btn-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin-sm 0.7s linear infinite;
+  display: inline-block;
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 400px) {
+  .app-title { font-size: 1.65rem; }
+  .card { padding: 1.25rem; }
+}
