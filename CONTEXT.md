@@ -96,13 +96,21 @@ E:\Ilytical\
 ---
 
 ## Planned Features (Backlog)
-- [ ] v1.1 — Scan history (local storage)
-- [ ] v1.2 — Export results as PDF/CSV
-- [ ] v1.3 — Competitor brand detection
-- [ ] v1.4 — Real auth with database (multi-user)
-- [ ] v1.5 — Dashboard with charts and trends
-- [ ] v1.6 — GPS/store tagging per scan
-- [ ] v1.7 — Offline mode (PWA)
+
+### Phase 1 — Foundation
+- [ ] **v1.1 — Database + Scan History** ← START HERE
+  - Save every scan result to MongoDB Atlas (free tier)
+  - View past scans in a history list
+  - Click any scan to see full results again
+
+### Phase 2 — Value Features (builds on DB)
+- [ ] **v1.2 — Export Results** — Download scan as PDF or CSV, share via link
+- [ ] **v1.3 — Store/Location Tagging** — Attach store name to each scan, filter history by store
+- [ ] **v1.4 — Dashboard & Charts** — SOS trends over time, visual bar charts per brand/store
+
+### Phase 3 — Multi-user (bigger lift)
+- [ ] **v1.5 — Real Auth + Multi-user** — Proper login with hashed passwords, each user sees own scans
+- [ ] **v1.6 — Team/Company Accounts** — Invite team members, company-wide reporting
 
 ---
 
@@ -110,6 +118,7 @@ E:\Ilytical\
 | Version | Date | What changed |
 |---------|------|--------------|
 | v1.0 | 2026-06-27 | Initial launch — stock count + SOS analysis, login, dark mode, deployed |
+| v1.1 | TBD | Database + Scan History (MongoDB Atlas) — in planning |
 
 ---
 
